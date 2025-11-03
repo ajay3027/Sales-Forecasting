@@ -1,81 +1,27 @@
-# --- Python ---
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.pdb
-*.so
-*.log
-*.pot
-*.pyc
-
-# --- Virtual Environment ---
+# Ignore Python virtual environments
 venv/
 env/
-ENV/
+environment/
 .venv/
-.environment/
-Scripts/
-Lib/
-Include/
+pyvenv.cfg
 
-# --- Jupyter / Notebooks ---
-.ipynb_checkpoints/
-*.ipynb_checkpoints
-*.ipynb_checkpoint
-
-# --- Environment / Credentials ---
-.env
-*.env
-config.json
-secret_key.txt
-
-# --- Cache & Build ---
-*.sqlite3
-*.db
-*.h5
-*.pkl
-*.npz
-*.npy
-.DS_Store
-*.egg-info/
-dist/
-build/
-.cache/
+# Ignore system and cache files
 __pycache__/
-
-# --- OS / Editor ---
-.vscode/
-.idea/
-*.swp
-*.swo
-*.bak
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.DS_Store
 Thumbs.db
 
-# --- Flask ---
-instance/
-*.pid
-*.log
-
-# --- Data Files ---
-data/*.csv
-*.csv
-*.xlsx
-
-# --- TensorFlow / Model Files ---
-*.hdf5
-*.h5
-*.pb
-checkpoints/
-saved_model/
+# Ignore models and data
 models/
+*.h5
+*.keras
+*.csv
 
-# --- Temporary Files ---
-temp/
-tmp/
-*.tmp
-
-# --- Other ---
-*.tar
-*.zip
-*.rar
+# Ignore IDE/project files
+.vscode/
+.idea/
+*.log
