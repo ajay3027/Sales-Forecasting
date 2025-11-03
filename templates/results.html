@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Forecast Results</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --primary:#3b82f6; --accent:#06b6d4; --muted:#6b7280; --radius:12px; }
+    body { margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:#111; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+    .container{ width:1000px; max-width:95%; }
+    .card{ background:var(--card); border-radius:var(--radius); padding:20px; box-shadow:0 6px 18px rgba(16,24,40,0.08); }
+    .top{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .pred{ font-size:22px; font-weight:700; color:var(--primary); }
+    .chart-wrap{ margin-top:18px; }
+    .actions{ margin-top:16px; display:flex; gap:12px; }
+    .btn{ background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="top">
+        <div>
+          <div style="font-size:14px;color:var(--muted)">Forecast Result</div>
+          <div class="pred">Predicted Next Day Sales: ₹ {{ prediction }}</div>
+        </div>
+        <div>
+          <a class="btn" href="/">New Prediction</a>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="chart"></canvas>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/download_csv">Download CSV</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const labels = {{ dates|tojson }};
+    const actual = {{ actuals|tojson }};
+    const predicted = {{ predicted|tojson }};
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Actual', data: actual, borderColor: '#3b82f6', fill:false, tension:0.2 },
+          { label: 'Predicted', data: predicted, borderColor: '#06b6d4', borderDash:[6,4], fill:false, tension:0.2 }
+        ]
+      },
+      options: {
+        responsive:true,
+        scales: {
+          x: { ticks: { color:'#374151' } },
+          y: { ticks: { color:'#374151' } }
+        },
+        plugins: { legend: { labels: { color:'#111' } } }
+      }
+    });
+  </script>
+</body>
+</html>
